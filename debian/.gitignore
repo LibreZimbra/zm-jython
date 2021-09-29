@@ -1,0 +1,5 @@
+*.log
+*.substvars
+/.debhelper
+/zimbra-jython
+/files
