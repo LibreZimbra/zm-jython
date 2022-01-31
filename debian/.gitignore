@@ -1,5 +1,5 @@
 *.log
 *.substvars
 /.debhelper
-/zimbra-jython
+/zimbra-zmconfigd
 /files

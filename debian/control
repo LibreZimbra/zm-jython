@@ -6,9 +6,9 @@ Standards-Version: 3.9.6
 Maintainer: Enrico Weigelt, metux IT consult <info@metux.net>
 Uploaders: Enrico Weigelt, metux IT consult <info@metux.net>
 
-Package: zimbra-jython
+Package: zimbra-zmconfigd
 Section: mail
 Priority: optional
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: LibreZimbra python scripts
+Description: LibreZimbra config daemon
