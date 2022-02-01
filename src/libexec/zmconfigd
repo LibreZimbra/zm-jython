@@ -16,6 +16,9 @@
 # ***** END LICENSE BLOCK *****
 #
 
+from org.apache.log4j import PropertyConfigurator
+PropertyConfigurator.configure("/opt/zimbra/conf/zmconfigd.log4j.properties");
+
 #set tempdir
 import tempfile
 tempfile.tempdir="/opt/zimbra/data/tmp"
@@ -29,7 +32,6 @@ import traceback
 
 import conf
 # import commands
-from org.apache.log4j import PropertyConfigurator
 import state
 import listener
 from ldap import Ldap
@@ -162,7 +164,6 @@ state.State.mState = myState
 myConfig = conf.Config()
 conf.Config.mConfig = myConfig;
 myState.getLocalConfig(myConfig)
-PropertyConfigurator.configure("/opt/zimbra/conf/zmconfigd.log4j.properties")
 Log.initLogging(myConfig)
 Ldap.initLdap(myConfig)
 
