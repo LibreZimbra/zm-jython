@@ -17,24 +17,14 @@
 
 import os
 import conf
-import sys
-import logging
 import time
-import logging
-import logging.handlers
 import re
-import threading
-
-from org.productivity.java.syslog4j import Syslog
-from org.productivity.java.syslog4j import SyslogIF
-from org.productivity.java.syslog4j import SyslogConstants
-from org.productivity.java.syslog4j.impl.unix import UnixSyslog
-from org.productivity.java.syslog4j.impl.unix.socket import UnixSocketSyslogConfig
+from org.apache.log4j import Logger, MDC
 
 class Log:
-	zmconfigdSyslogInstance = UnixSocketSyslogConfig(SyslogConstants.FACILITY_LOCAL0, "/dev/log")
-	zmsyslog = Syslog.createInstance("zmSyslog",zmconfigdSyslogInstance)
-	zmsyslog.getConfig().setLocalName("zmconfigd[%d]:" % os.getpid())
+	prefix = ("zmconfigd[%d]" % os.getpid())
+	mylog = Logger.getLogger(prefix);
+	MDC.put("PID", os.getpid());
 
 	@classmethod
 	def initLogging(cls, c = None):
@@ -52,11 +42,19 @@ class Log:
 			lvl = 5
 		msg = re.sub(r"\s|\n", " ", msg)
 
-		if lvl <= cls.cf.loglevel:
-			Log.zmsyslog.log(lvl, msg)
-
 		if lvl == 0:
-			Log.zmsyslog.log(2, "%s: shutting down" % (cls.cf.progname,) )
+			Log.mylog.fatal(msg)
+			Log.mylog.warn(2, "%s: shutting down" % (cls.cf.progname,) )
 			os._exit(1)
+		elif lvl == 1:
+			Log.mylog.error(msg)
+		elif lvl == 2:
+			Log.mylog.warn(msg)
+		elif lvl == 3:
+			Log.mylog.info(msg)
+		elif lvl == 4:
+			Log.mylog.debug(msg)
+		else:
+			Log.mylog.trace(msg)
 
 Log.initLogging()
