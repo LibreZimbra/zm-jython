@@ -60,8 +60,10 @@ exe = {
 	'DNSCACHE'	: "bin/zmdnscachectl",
 	}
 
+provisioning = Provisioning.getInstance(Provisioning.CacheMode.OFF)
+
 class Command:
-	P = Provisioning.getInstance(Provisioning.CacheMode.OFF)
+	P = provisioning
 
 	@classmethod
 	def resetProvisioning(cls, type):
