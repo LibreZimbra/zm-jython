@@ -12,6 +12,7 @@ install:
 	$(call install_conf, conf/zmconfigd.log4j.properties)
 	$(call install_libexec, src/libexec/zmconfigd)
 	$(call install_libexec, src/libexec/zmpython)
+	( cd $(INSTALL_DIR)/libexec && ln -s zmconfigd zmconfigd-oneshot )
 
 clean:
 	echo -n

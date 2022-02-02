@@ -249,7 +249,8 @@ while True:
 		time.sleep(60)
 		continue
 
-	if myState.forced:
+	# in forced- or oneshot-mode exit after first run
+	if myState.forced or (os.path.basename(sys.argv[0]) == "zmconfigd-oneshot"):
 		break
 
 	# start the listener after we have the lock, or an early request can cause problems
