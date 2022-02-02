@@ -169,6 +169,8 @@ Ldap.initLdap(myConfig)
 
 Log.logMsg(1, "%s started on %s with loglevel=%d pid=%d" % (myConfig.progname, myConfig.hostname, myConfig.loglevel, os.getpid()))
 
+print("ARGS: "+repr(sys.argv))
+
 # if forced, check for a running daemon.  If there's not one, just run once to maintain legacy behavior
 if len(sys.argv) > 1:
 	if contactService("REWRITE", sys.argv[1:]):
