@@ -121,9 +121,7 @@ class MtaConfig():
 		return self.sections
 
 	def addSection(self, section):
-		print("--> adding section: %s" % section.name)
 		self.sections[section.name] = section
-		print("SECTION DATA: "+repr(section))
 
 	def getServiceMap(self, sname):
 		if self.sectionMap.has_key(sname):
@@ -151,10 +149,8 @@ class MtaConfig():
 			section = Section()
 
 			if re.match(r"SECTION", lines[i]):
-				print("found section: "+section.name)
 				section.name = fields[1]
 				servicemap = self.getServiceMap(section.name)
-				print("servicemap: "+repr(servicemap))
 
 			i += 1
 
