@@ -42,6 +42,8 @@ class Log:
 			lvl = 5
 		msg = re.sub(r"\s|\n", " ", msg)
 
+		print("LOG: %s" % msg)
+
 		if lvl == 0:
 			Log.mylog.fatal(msg)
 			Log.mylog.warn(2, "%s: shutting down" % (cls.cf.progname,) )

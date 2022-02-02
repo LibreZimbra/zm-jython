@@ -98,6 +98,9 @@ class Section():
 			return None
 		return self.config["ldap"]
 
+	def __repr__(self):
+		return "NAME="+repr(self.name)+"\nCHANGED="+repr(self.changed)+"\nCONFIG="+repr(self.config)
+
 class MtaConfig():
 	def __init__(self):
 		self.sections = {}
@@ -118,7 +121,9 @@ class MtaConfig():
 		return self.sections
 
 	def addSection(self, section):
+		print("--> adding section: %s" % section.name)
 		self.sections[section.name] = section
+		print("SECTION DATA: "+repr(section))
 
 	def getServiceMap(self, sname):
 		if self.sectionMap.has_key(sname):
@@ -146,8 +151,10 @@ class MtaConfig():
 			section = Section()
 
 			if re.match(r"SECTION", lines[i]):
+				print("found section: "+section.name)
 				section.name = fields[1]
 				servicemap = self.getServiceMap(section.name)
+				print("servicemap: "+repr(servicemap))
 
 			i += 1
 
